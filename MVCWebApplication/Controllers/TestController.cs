@@ -28,11 +28,11 @@ namespace MVCWebApplication.Controllers
             Employee emp = new Employee();
             emp.FirstName = "Sukesh";
             emp.LastName = "Marla";
-            emp.Salary = 20000;
+            emp.Salary = 12000;
 
             //ViewData["Employee"] = emp;
-            ViewBag.Employee = emp;
-            return View("MyView");
+            //ViewBag.Employee = emp;
+            return View("MyView", emp);
         }
 
     }
