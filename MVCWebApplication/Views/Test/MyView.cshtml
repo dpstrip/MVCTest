@@ -12,7 +12,7 @@
 </head>
 <body>
     <div> 
-        @{ MVCWebApplication.Models.Employee emp = (MVCWebApplication.Models.Employee)ViewData["Employee"];}
+        @{ MVCWebApplication.Models.Employee emp = (MVCWebApplication.Models.Employee)ViewBag.Employee;}
 
         <b> Employee Details </b><br/>
         Employee Name : @emp.FirstName @emp.LastName <br/>
