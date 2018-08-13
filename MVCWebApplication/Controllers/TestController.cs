@@ -26,27 +26,29 @@ namespace MVCWebApplication.Controllers
 
         public ActionResult GetView()
         {
-            Employee emp = new Employee();
-            emp.FirstName = "Sukesh";
-            emp.LastName = "Marla";
-            emp.Salary = 18000;
+            EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
+            EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+            List<Employee> employees = empBal.GetEmployees();
+            List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
 
-            EmployeeViewModel vmEmp = new EmployeeViewModel();
-            vmEmp.EmployeeName = emp.FirstName + " " + emp.LastName;
-            vmEmp.Salary = emp.Salary.ToString("C");
-            vmEmp.UserName = "Admin";
-
-            if(emp.Salary > 15000)
+            foreach(Employee emp in employees)
             {
-                vmEmp.SalaryColor = "yellow";
+                EmployeeViewModel empViewModel = new EmployeeViewModel();
+                empViewModel.EmployeeName = emp.FirstName + " " + emp.LastName;
+                empViewModel.Salary = emp.Salary.ToString("C");
+                if(emp.Salary> 15000)
+                {
+                    empViewModel.SalaryColor = "yellow";
+                }
+                else
+                {
+                    empViewModel.SalaryColor = "green";
+                }
+                empViewModels.Add(empViewModel);
             }
-            else
-            {
-                vmEmp.SalaryColor = "green";
-            }
-
-            return View("MyView", vmEmp);
-
+            employeeListViewModel.UserName = "Admin";
+            employeeListViewModel.Employees = empViewModels;
+            return View("MyView", employeeListViewModel);
         }
 
     }

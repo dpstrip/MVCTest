@@ -1,5 +1,5 @@
 ﻿@using MVCWebApplication.ViewModels
-@model EmployeeViewModel
+@model EmployeeListViewModel
 @{
     Layout = null;
 }
@@ -17,9 +17,20 @@
     Hello @Model.UserName
     <hr/>
     <div>
-        <b> Employee Details </b><br />
-        Employee Name: @Model.EmployeeName<br/>
-        <span style="background-color:@Model.SalaryColor">Employee Salary: @Model.Salary</span>
+        <table>
+            <tr>
+                <th>Employee Name</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (EmployeeViewModel item in Model.Employees)
+            {
+                <tr>
+                    <td>@item.EmployeeName</td>
+                    <td style="background-color:@item.SalaryColor">Employee Salary: @item.Salary</td>
+                </tr>
+            }
+        </table>
+        
     </div>
 
 
