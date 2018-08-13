@@ -1,5 +1,5 @@
-﻿@using MVCWebApplication.Models
-@model Employee
+﻿@using MVCWebApplication.ViewModels
+@model EmployeeViewModel
 @{
     Layout = null;
 }
@@ -14,22 +14,12 @@
     <title>MyView</title>
 </head>
 <body>
+    Hello @Model.UserName
+    <hr/>
     <div>
         <b> Employee Details </b><br />
-        Employee Name : @Model.FirstName @Model.LastName <br />
-
-        @if (Model.Salary > 15000)
-        {
-            <span style="background-color:yellow">
-                Emloyee Salary: @Model.Salary.ToString("C");
-            </span>
-        }
-        else
-        {
-            <span style="background-color:green">
-                Emloyee Salary: @Model.Salary.ToString("C");
-            </span>
-        }
+        Employee Name: @Model.EmployeeName<br/>
+        <span style="background-color:@Model.SalaryColor">Employee Salary: @Model.Salary</span>
     </div>
 
 

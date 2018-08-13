@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVCWebApplication.Models;
+using MVCWebApplication.ViewModels;
 
 namespace MVCWebApplication.Controllers
 {
@@ -28,11 +29,24 @@ namespace MVCWebApplication.Controllers
             Employee emp = new Employee();
             emp.FirstName = "Sukesh";
             emp.LastName = "Marla";
-            emp.Salary = 12000;
+            emp.Salary = 18000;
 
-            //ViewData["Employee"] = emp;
-            //ViewBag.Employee = emp;
-            return View("MyView", emp);
+            EmployeeViewModel vmEmp = new EmployeeViewModel();
+            vmEmp.EmployeeName = emp.FirstName + " " + emp.LastName;
+            vmEmp.Salary = emp.Salary.ToString("C");
+            vmEmp.UserName = "Admin";
+
+            if(emp.Salary > 15000)
+            {
+                vmEmp.SalaryColor = "yellow";
+            }
+            else
+            {
+                vmEmp.SalaryColor = "green";
+            }
+
+            return View("MyView", vmEmp);
+
         }
 
     }
