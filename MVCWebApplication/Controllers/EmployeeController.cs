@@ -61,9 +61,15 @@ namespace MVCWebApplication.Controllers
             switch(BtnSubmit)
             {
                 case "Save Employee":
-                    EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
-                    empBal.SaveEmployee(e);
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+                        empBal.SaveEmployee(e);
+                        return RedirectToAction("Index");
+                    }else
+                    {
+                        return View("CreateEmployee");
+                    }
                 case "Cancel":
                     return RedirectToAction("Index");
             }
