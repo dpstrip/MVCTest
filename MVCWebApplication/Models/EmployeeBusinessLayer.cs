@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MVCWebApplication.DataAccessLayer;
 
 namespace MVCWebApplication.Models
 {
@@ -9,26 +10,36 @@ namespace MVCWebApplication.Models
     {
         public List<Employee> GetEmployees()
         {
-            List<Employee>  employees = new List<Employee>();
-            Employee emp = new Employee();
-            emp.FirstName = "johnson";
-            emp.LastName = " fernandes";
-            emp.Salary = 14000;
-            employees.Add(emp);
+            SalesERPDAL salesdal = new SalesERPDAL();
+            return salesdal.Employees.ToList();
 
-            emp = new Employee();
-            emp.FirstName = "michael";
-            emp.LastName = "jackson";
-            emp.Salary = 16000;
-            employees.Add(emp);
+            //List<Employee>  employees = new List<Employee>();
+            //Employee emp = new Employee();
+            //emp.FirstName = "johnson";
+            //emp.LastName = " fernandes";
+            //emp.Salary = 14000;
+            //employees.Add(emp);
 
-            emp = new Employee();
-            emp.FirstName = "robert";
-            emp.LastName = " pattinson";
-            emp.Salary = 20000;
-            employees.Add(emp);
+            //emp = new Employee();
+            //emp.FirstName = "michael";
+            //emp.LastName = "jackson";
+            //emp.Salary = 16000;
+            //employees.Add(emp);
 
-            return employees;
+            //emp = new Employee();
+            //emp.FirstName = "robert";
+            //emp.LastName = " pattinson";
+            //emp.Salary = 20000;
+            //employees.Add(emp);
+
+            //return employees;
+        }
+        public Employee SaveEmployee(Employee e)
+        {
+            SalesERPDAL salesDal = new SalesERPDAL();
+            salesDal.Employees.Add(e);
+            salesDal.SaveChanges();
+            return e;
         }
     }
 }
