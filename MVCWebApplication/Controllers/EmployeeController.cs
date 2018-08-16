@@ -35,7 +35,7 @@ namespace MVCWebApplication.Controllers
             {
                 EmployeeViewModel empViewModel = new EmployeeViewModel();
                 empViewModel.EmployeeName = emp.FirstName + " " + emp.LastName;
-                empViewModel.Salary = emp.Salary.ToString("C");
+                empViewModel.Salary = emp.Salary.Value.ToString("C");
                 if(emp.Salary> 15000)
                 {
                     empViewModel.SalaryColor = "yellow";
@@ -53,7 +53,7 @@ namespace MVCWebApplication.Controllers
 
         public ActionResult AddNew()
         {
-            return View("CreateEmployee");
+            return View("CreateEmployee", new CreateEmployeeViewModel());
         }
 
         public ActionResult SaveEmployee(Employee e, string BtnSubmit)
@@ -68,7 +68,20 @@ namespace MVCWebApplication.Controllers
                         return RedirectToAction("Index");
                     }else
                     {
-                        return View("CreateEmployee");
+
+                        CreateEmployeeViewModel vm = new CreateEmployeeViewModel();
+                        vm.FirstName = e.FirstName;
+                        vm.LastName = e.LastName;
+                        if (e.Salary.HasValue)
+                        {
+                            vm.Salary = e.Salary.ToString();
+                        }
+                        else
+                        {
+                            vm.Salary = ModelState["Salary"].Value.AttemptedValue;
+                        }
+
+                        return View("CreateEmployee", vm);
                     }
                 case "Cancel":
                     return RedirectToAction("Index");
