@@ -27,6 +27,7 @@ namespace MVCWebApplication.Controllers
         public ActionResult Index()
         {
             EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
+            employeeListViewModel.UserName = User.Identity.Name; //
             EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
             List<Employee> employees = empBal.GetEmployees();
             List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
