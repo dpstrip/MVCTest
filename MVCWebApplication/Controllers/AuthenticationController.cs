@@ -16,6 +16,12 @@ namespace MVCWebApplication.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
         [HttpPost]
         public ActionResult DoLogin(UserDetails u)
         {
