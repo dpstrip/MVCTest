@@ -36,6 +36,8 @@ namespace MVCWebApplication.Controllers
 
             return c;
         }
+
+        [HeaderFooterFilter]
         [Authorize]
         public ActionResult Index()
         {
@@ -60,25 +62,21 @@ namespace MVCWebApplication.Controllers
                 }
                 empViewModels.Add(empViewModel);
             }
-            //employeeListViewModel.UserName = "Admin";
+
             employeeListViewModel.Employees = empViewModels;
-            employeeListViewModel.FooterData = new FooterViewModel();
-            employeeListViewModel.FooterData.CompanyName = "David's Company";
-            employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
             return View("Index", employeeListViewModel);
         }
         [AdminFilters]
+        [HeaderFooterFilter]
         public ActionResult AddNew()
         {
             CreateEmployeeViewModel employeeListViewModel = new CreateEmployeeViewModel();
-            employeeListViewModel.FooterData = new FooterViewModel();
-            employeeListViewModel.FooterData.CompanyName = "David's Company";
-            employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
-            employeeListViewModel.UserName = User.Identity.Name;
+            
             return View("CreateEmployee",employeeListViewModel );
         }
 
         [AdminFilters]
+        [HeaderFooterFilter]
         public ActionResult SaveEmployee(Employee e, string BtnSubmit)
         {
             switch(BtnSubmit)
@@ -103,10 +101,7 @@ namespace MVCWebApplication.Controllers
                         {
                             vm.Salary = ModelState["Salary"].Value.AttemptedValue;
                         }
-                        vm.FooterData = new FooterViewModel();
-                        vm.FooterData.CompanyName = "StepByStepSchools";//Can be set to dynamic value
-                        vm.FooterData.Year = DateTime.Now.Year.ToString();
-                        vm.UserName = User.Identity.Name; //New Line
+
                         return View("CreateEmployee", vm);
                     }
                 case "Cancel":
