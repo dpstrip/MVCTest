@@ -18,8 +18,8 @@
     <div style="text-align:right"> Hello, @Model.UserName 
     <a href="/Authentication/Logout">Logout</a></div>
     <hr />
-
-    <a href="/Employee/AddNew">Add New</a>
+    @{ Html.RenderAction("GetAddNewLink");}
+ 
     <div>
         <table>
             <tr>

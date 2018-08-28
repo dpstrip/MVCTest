@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCWebApplication.Filters;
 using MVCWebApplication.Models;
 using MVCWebApplication.ViewModels;
 
@@ -13,6 +14,18 @@ namespace MVCWebApplication.Controllers
         public string GetString()
         {
             return "Hello World is old now.  Its time for Wassup bro;)";
+        }
+
+        public ActionResult GetAddNewLink()
+        {
+            if(Convert.ToBoolean(Session["IsAdmin"]))
+            {
+                return PartialView("AddNewLink");
+            }
+            else
+            {
+                return new EmptyResult();
+            }
         }
 
         public Customer GetCustomer()
@@ -54,12 +67,13 @@ namespace MVCWebApplication.Controllers
             employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
             return View("Index", employeeListViewModel);
         }
-
+        [AdminFilters]
         public ActionResult AddNew()
         {
             return View("CreateEmployee", new CreateEmployeeViewModel());
         }
 
+        [AdminFilters]
         public ActionResult SaveEmployee(Employee e, string BtnSubmit)
         {
             switch(BtnSubmit)

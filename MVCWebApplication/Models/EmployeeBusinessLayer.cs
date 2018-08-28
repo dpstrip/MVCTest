@@ -9,15 +9,19 @@ namespace MVCWebApplication.Models
     public class EmployeeBusinessLayer
     {
 
-        public bool IsValidUser(UserDetails u)
+
+        public UserStatus GetUserValidity(UserDetails u)
         {
-            if (u.UserName == "Admin" && u.Password == "Admin")
+            if(u.UserName == "Admin" && u.Password == "Admin")
             {
-                return true;
+                return UserStatus.AutthenticatedAdmin;
             }
-            else
+            else if(u.UserName == "David" && u.Password == "David")
+                {
+                return UserStatus.AuthentucatedUser;
+            }else
             {
-                return false;
+                return UserStatus.NonAuthenticatedUser;
             }
         }
 
