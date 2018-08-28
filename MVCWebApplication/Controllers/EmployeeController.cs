@@ -49,6 +49,9 @@ namespace MVCWebApplication.Controllers
             }
             //employeeListViewModel.UserName = "Admin";
             employeeListViewModel.Employees = empViewModels;
+            employeeListViewModel.FooterData = new FooterViewModel();
+            employeeListViewModel.FooterData.CompanyName = "David's Company";
+            employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
             return View("Index", employeeListViewModel);
         }
 
